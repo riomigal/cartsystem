@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8000'
+paths:
+  /api/login:
+    post:
+      summary: Login
+      description: 'Get a sanctum token to access the other endpoints.'
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "{\n     token: JpzkCwV6JWQ7wEvky2CCrwOUAUfFPg14McdOoL6E\n}"
+        401:
+          description: 'Wrong user or password'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'Invalid Login Credentials'
+                properties:
+                  message:
+                    type: string
+                    example: 'Invalid Login Credentials'
+      tags:
+        - V1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'The email of the user.'
+                  example: john@doe.test
+                password:
+                  type: string
+                  description: 'The password of the user.'
+                  example: '12345678'
+              required:
+                - email
+                - password
+      security: []
+  /api/cart/store:
+    post:
+      summary: 'Add new Product to Cart'
+      description: 'Add new products to cart'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  result: 0
+                  message: 'Product added to cart'
+                  product:
+                    id: 2
+                    name: Product2
+                    quantity: 2
+                    price: '30.18'
+                    total_price: 60.36
+                  available: 3
+                  timestamp: '2022-02-27T00:39:23.408573Z'
+                properties:
+                  result:
+                    type: integer
+                    example: 0
+                  message:
+                    type: string
+                    example: 'Product added to cart'
+                  product:
+                    type: object
+                    example:
+                      id: 2
+                      name: Product2
+                      quantity: 2
+                      price: '30.18'
+                      total_price: 60.36
+                  available:
+                    type: integer
+                    example: 3
+                  timestamp:
+                    type: string
+                    example: '2022-02-27T00:39:23.408573Z'
+      tags:
+        - V1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                  description: 'The product id.'
+                  example: 1
+                quantity:
+                  type: integer
+                  description: 'The quantity.'
+                  example: 1
+              required:
+                - product_id
+                - quantity
+  /api/cart:
+    get:
+      summary: 'Get Cart'
+      description: 'Get Cart from current user'
+      parameters:
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {YOUR_AUTH_KEY}'
+          schema:
+            type: string
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  result: 0
+                  cart_products:
+                    '1':
+                      'Product name': Product1
+                      quantity: '20'
+                      price: '98.65'
+                      total_price: '1973'
+                  cart_final_price: '1973'
+                  timestamp: '2022-02-27T00:34:40.188984Z'
+                properties:
+                  result:
+                    type: integer
+                    example: 0
+                  cart_products:
+                    type: object
+                    example:
+                      '1':
+                        'Product name': Product1
+                        quantity: '20'
+                        price: '98.65'
+                        total_price: '1973'
+                  cart_final_price:
+                    type: string
+                    example: '1973'
+                  timestamp:
+                    type: string
+                    example: '2022-02-27T00:34:40.188984Z'
+      tags:
+        - V1
+tags:
+  -
+    name: V1
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: ''
+security:
+  -
+    default: []

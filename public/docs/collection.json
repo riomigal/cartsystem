@@ -1,0 +1,139 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost:8000"
+        }
+    ],
+    "info": {
+        "name": "Laravel",
+        "_postman_id": "9ff4d3e5-7899-41db-b7cd-fae85ad22dd1",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "V1",
+            "description": "",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/login",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/login"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"email\":\"john@doe.test\",\"password\":\"12345678\"}"
+                        },
+                        "description": "Get a sanctum token to access the other endpoints.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n     token: JpzkCwV6JWQ7wEvky2CCrwOUAUfFPg14McdOoL6E\n}",
+                            "name": "success"
+                        },
+                        {
+                            "header": [],
+                            "code": 401,
+                            "body": "{\"message\": \"Invalid Login Credentials\"}",
+                            "name": "Wrong user or password"
+                        }
+                    ]
+                },
+                {
+                    "name": "Add new Product to Cart",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart\/store",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cart\/store"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"product_id\":1,\"quantity\":1}"
+                        },
+                        "description": "Add new products to cart"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"result\": 0,\n\"message\": \"Product added to cart\",\n\"product\": {\n   \"id\": 2,\n  \"name\": \"Product2\",\n  \"quantity\": 2,\n  \"price\": \"30.18\",\n  \"total_price\": 60.36\n},\n\"available\": 3,\n\"timestamp\": \"2022-02-27T00:39:23.408573Z\"\n}",
+                            "name": "success"
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Cart",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/cart",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/cart"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Get Cart from current user"
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\n\"result\": 0,\n\"cart_products\": {\n  \"1\": {\n     \"Product name\": \"Product1\",\n      \"quantity\": \"20\",\n      \"price\": \"98.65\",\n      \"total_price\": \"1973\"\n  }\n},\n\"cart_final_price\": \"1973\",\n\"timestamp\": \"2022-02-27T00:34:40.188984Z\"\n}",
+                            "name": "success"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer"
+    }
+}

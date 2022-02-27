@@ -7,6 +7,25 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+# How to use
+
+1. Clone the repository on your machine
+2. Rename .env-setup to .env
+3. Run:
+    ```
+    composer install
+    php artisan migrate
+    php artisan db:seed
+    php artisan serve
+
+    ```
+4. Open localhost:8000/docs
+    - V1 Login: Generate a Bearer token
+    - V1 Add Product: Add a new product with ids 1-30 and quantity
+    - V1 Get Cart: Check the cart
+
+Each product added to the cart will be assigned a unique serialnumber.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
