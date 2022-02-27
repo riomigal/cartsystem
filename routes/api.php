@@ -21,7 +21,7 @@ Route::middleware(['respond.json', 'log.request'])->group(function () {
 
     Route::post('/login', [LoginController::class, 'login'])->name('api.login');
 
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware(['auth:sanctum', 'abilities:cart:access'])->group(function () {
         Route::post('/cart/store', [CartController::class, 'store'])->name('api.cart.store');
         Route::get('/cart', [CartController::class, 'index'])->name('api.cart');
     });
