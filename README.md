@@ -10,7 +10,7 @@
 # How to use
 
 1. Clone the repository on your machine
-2. Rename .env-setup to .env
+2. Rename .env.example to .env
 3. Run:
     ```
     composer install
